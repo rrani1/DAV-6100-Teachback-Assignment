@@ -25,27 +25,54 @@ Resources
 Postman Download
 GitHub Repository for Further Exploration
 -------------------------------------------
-# Headers for the GitHub API request
-headers = {
-"Authorization": f"token {token}",
-"Content-Type": "application/json",
-}
+import requests
 
-# Data for creating or updating the README.md file
-data = {
-"message": "Update README.md",
-"content": readme_content.encode("base64").decode("utf-8"),
-}
+# Replace this URL with the actual endpoint you want to request
+api_url = "https://api.example.com/users/123"
 
-# Make a PUT request to create or update the README.md file
-response = requests.put(api_url, headers=headers, json=data)
+# Make a GET request
+response = requests.get(api_url)
 
 # Check the response status
 if response.status_code == 200:
-print("README.md file updated successfully.")
+    # Print the response content (assuming it's in JSON format)
+    print("Response Content:")
+    print(response.json())
 else:
-print(f"Failed to update README.md. Status Code: {response.status_code}")
-print(response.text)
+    print(f"Failed to make GET request. Status Code: {response.status_code}")
+    print(response.text)
+
+#OR
+
+#CODE-2
+
+import requests
+import base64
+
+# Replace these values with your GitHub username, repository name, and personal access token
+username = "your-username"
+repository = "your-repository"
+token = "your-personal-access-token"
+
+# GitHub API endpoint for creating or updating a file
+api_url = f"https://api.github.com/repos/{username}/{repository}/contents/README.md"
+
+# Content of the README.md file
+readme_content = """
+# Your Presentation Title
+
+This repository contains slides and resources for my awesome presentation.
+
+## Slides
+
+- [Presentation Slides](presentation-slides.pdf)
+
+## Code Snippets
+
+### Python Example
+
+```python
+print("Hello, world!")
 
 
 # (Please replace the placeholder values (`your-username`, `your-repository`, `your-personal-access-token`) with your actual GitHub username, repository name, and a personal access token with the required permissions.
